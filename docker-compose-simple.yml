@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/vue/src/go-money
+    ports:
+      - 8081:8080
+
+volumes:
+  esdata1:
+    driver: local
