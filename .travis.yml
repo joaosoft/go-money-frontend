@@ -1,0 +1,17 @@
+---
+language: javascript
+sudo: false
+notifications:
+  email: joaosoft@gmail.com
+jobs:
+  include:
+    - stage: test
+      install:
+        - go get -u github.com/golang/dep/cmd/dep
+        - dep ensure
+      os: linux
+      go: master
+      script:
+        
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
