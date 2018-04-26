@@ -3,6 +3,9 @@ MAINTAINER João Ribeiro <joaosoft@gmail.com>
 
 ARG PROJECT_NAME=go-money
 
+# install webpack
+RUN npm link webpack && npm install webpack-cli -D
+
 # install nodemon
 RUN npm install nodemon -g
 

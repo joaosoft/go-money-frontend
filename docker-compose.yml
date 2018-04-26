@@ -4,14 +4,14 @@ services:
   web:
     build:
       context: .
-      dockerfile: sbin/docker/node.dockerfile
+      dockerfile: sbin/docker/node.dockerfile-dev
     environment:
-      - env=dev
+      - env=prod
     command: npm run prod
     volumes:
       - ./app:/vue/src/go-money
     ports:
-      - 8081:8081
+      - 8081:8080
 
 volumes:
   esdata1:
