@@ -1,40 +1,16 @@
 version: '3.1'
-
 services:
-  app:
-    image: app
-    ports:
-      - 8080:8081
-    environment:
-      - SERVICE_PORTS=8080
-    deploy:
-      replicas: 10
-      update_config:
-        parallelism: 5
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-        window: 120s
-    networks:
-      - web
 
-  proxy:
-    image: dockercloud/haproxy
-    depends_on:
-      - app
-    environment:
-      - BALANCE=leastconn
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 8081:80
-    networks:
-      - web
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-
-networks:
   web:
-    driver: overlay
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ./app:/vue/src/go-money
+    ports:
+      - 8081:8080
+
+volumes:
+  esdata1:
+    driver: local

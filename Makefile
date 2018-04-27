@@ -6,9 +6,6 @@ start: env
 run:
 	npm run dev
 
-build:
-	npm run build
-
 utest:
 	npm run utest
 
@@ -18,8 +15,12 @@ test:
 e2e:
 	npm run e2e
 
-deploy:
-	docker build -t app .
-	-docker swarm leave --force
-	-docker swarm init
-	docker stack deploy --compose-file=docker-compose.yml production
+build:
+	docker build -t go-money-frontend-image .
+
+push:
+	docker login
+	docker tag go-money-frontend-image joaosoft/go-money-frontend-image
+	docker push joaosoft/go-money-frontend-image
+
+dockerhub: build push

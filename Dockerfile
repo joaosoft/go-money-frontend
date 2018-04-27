@@ -24,4 +24,4 @@ ADD ./app/config /etc/$PROJECT_NAME
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+#CMD [ "npm", "start" ]
